@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nicole Ji Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a press clipping desk. Navy ink on cool paper, key results set in a navy tint, a wire-style ticker of numbers. */
+:root {
+  --paper: #f4f6f9;
+  --sheet: #ffffff;
+  --ink: #16203a;
+  --navy: #1e3a6e;
+  --muted: #5b6477;
+  --rule: #d5dbe5;
+  --marker: #dbe4f4;
+  --marker-ink: #16305f;
+  --display: "Instrument Serif", "Times New Roman", serif;
+  --body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0e1423; --sheet: #151d30; --ink: #e8ecf4; --navy: #9db5e6; --muted: #98a2b6; --rule: #273249;
+    --marker: #243a66; --marker-ink: #e8ecf4; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0e1423; --sheet: #151d30; --ink: #e8ecf4; --navy: #9db5e6; --muted: #98a2b6; --rule: #273249;
+  --marker: #243a66; --marker-ink: #e8ecf4; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--body); font-size: 16px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+html[data-lang="en"] .ko { display: none !important; }
+html[data-lang="ko"] .en { display: none !important; }
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+/* top bar */
+.bar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--rule); font-family: var(--mono); font-size: 13px; letter-spacing: .02em; }
+.bar .dateline { color: var(--muted); }
+.toggle { display: inline-flex; border: 1px solid var(--navy); border-radius: 999px; overflow: hidden; }
+.toggle button { font: inherit; background: transparent; color: var(--ink); border: 0; padding: 6px 14px; cursor: pointer; }
+.toggle button[aria-pressed="true"] { background: var(--navy); color: var(--paper); }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; padding: 64px 0 48px; align-items: end; }
+.kicker { font-family: var(--mono); font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 16px; }
+.hero h1 { font-family: var(--display); font-weight: 400; font-size: clamp(64px, 10vw, 128px); line-height: .9; margin: 0 0 28px; letter-spacing: -.01em; color: var(--navy); }
+.hero h1 em { font-style: italic; }
+.thesis { font-size: clamp(19px, 2.2vw, 24px); line-height: 1.5; margin: 0; max-width: 34ch; text-wrap: balance; font-weight: 300; }
+html[data-lang="ko"] .thesis { max-width: 30ch; }
+.mark {
+  background-image: linear-gradient(var(--marker), var(--marker));
+  background-repeat: no-repeat; background-position: 0 88%; background-size: 100% 42%;
+  padding: 0 2px; animation: sweep 900ms cubic-bezier(.6,.1,.2,1) both; color: var(--marker-ink); font-weight: 500;
+}
+.mark:nth-of-type(2) { animation-delay: 350ms; }
+@keyframes sweep { from { background-size: 0% 42%; } to { background-size: 100% 42%; } }
+@media (prefers-reduced-motion: reduce) { .mark { animation: none; } }
+
+.card-id { background: var(--sheet); border: 1px solid var(--rule); padding: 24px; display: grid; gap: 14px; font-size: 15px; }
+.card-id dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; }
+.card-id dt { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding-top: 3px; }
+.card-id dd { margin: 0; }
+.card-id a { text-decoration-thickness: 1px; text-underline-offset: 3px; word-break: break-all; }
+
+/* ticker */
+.ticker { border-top: 3px solid var(--navy); border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: repeat(4, 1fr); }
+.stat { padding: 22px 20px 22px 0; display: grid; gap: 4px; }
+.stat + .stat { border-left: 1px solid var(--rule); padding-left: 20px; }
+.stat b { font-family: var(--display); font-weight: 400; font-size: 44px; line-height: 1; font-variant-numeric: tabular-nums; color: var(--navy); }
+.stat span { font-size: 14px; color: var(--muted); line-height: 1.45; }
+
+/* sections */
+section { padding: 72px 0 0; }
+.sec-head { display: flex; align-items: baseline; gap: 16px; border-bottom: 2px solid var(--navy); padding-bottom: 10px; margin-bottom: 28px; }
+.sec-head h2 { font-family: var(--display); font-weight: 400; font-size: 40px; line-height: 1.1; margin: 0; color: var(--navy); }
+html[data-lang="ko"] .sec-head h2 { font-family: var(--body); font-weight: 600; font-size: 30px; }
+.sec-head .count { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-left: auto; }
+
+/* case clippings */
+.cases { display: grid; gap: 24px; }
+.case { background: var(--sheet); border: 1px solid var(--rule); border-left: 4px solid var(--navy); display: grid; grid-template-columns: 220px 1fr; }
+.case-meta { padding: 24px; border-right: 1px dashed var(--rule); display: grid; align-content: start; gap: 10px; font-size: 14px; }
+.case-meta .client { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--navy); font-weight: 500; }
+.case-meta .tag { color: var(--muted); }
+.case-body { padding: 24px 28px 28px; display: grid; gap: 16px; }
+.case-body h3 { margin: 0; font-size: 22px; line-height: 1.35; font-weight: 600; text-wrap: balance; }
+.rows { display: grid; gap: 12px; margin: 0; }
+.rows > div { display: grid; grid-template-columns: 96px 1fr; gap: 16px; }
+.rows dt { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding-top: 4px; }
+.rows dd { margin: 0; max-width: 62ch; }
+.result { background: var(--marker); color: var(--marker-ink); padding: 1px 4px; font-weight: 500; }
+.links { display: flex; flex-wrap: wrap; gap: 8px; }
+.todo { font-family: var(--mono); font-size: 12px; border: 1px dashed var(--muted); color: var(--muted); padding: 4px 10px; border-radius: 999px; }
+.linkgroup { display: grid; gap: 8px; }
+.linkgroup .lg-label { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.lk { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 500; text-decoration: none; color: var(--navy); border: 1px solid var(--navy); padding: 5px 12px; border-radius: 999px; transition: background .15s, color .15s; }
+.lk::after { content: "↗"; font-size: 12px; }
+.lk:hover { background: var(--navy); color: var(--paper); }
+
+/* capabilities */
+.caps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--rule); }
+.cap { padding: 22px 22px 22px 0; border-bottom: 1px solid var(--rule); }
+.cap:not(:nth-child(3n+1)) { padding-left: 22px; border-left: 1px solid var(--rule); }
+.cap h4 { margin: 0 0 6px; font-size: 16px; font-weight: 600; }
+.cap p { margin: 0; font-size: 14.5px; color: var(--muted); }
+
+/* experience */
+.timeline { display: grid; gap: 0; }
+.job { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--rule); }
+.job .when { font-family: var(--mono); font-size: 13px; color: var(--muted); padding-top: 3px; }
+.job h3 { margin: 0; font-size: 19px; font-weight: 600; }
+.job .role { color: var(--muted); font-size: 15px; margin: 2px 0 10px; }
+.job ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; max-width: 70ch; }
+.brands { font-size: 14.5px; }
+
+.edu { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.edu > div { background: var(--sheet); border: 1px solid var(--rule); padding: 24px; }
+.edu h3 { margin: 0 0 4px; font-size: 18px; font-weight: 600; }
+.edu p { margin: 0; color: var(--muted); font-size: 15px; }
+
+footer { margin-top: 80px; padding: 32px 0 48px; border-top: 3px solid var(--navy); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 15px; }
+footer .big { font-family: var(--display); font-size: 36px; line-height: 1.1; color: var(--navy); }
+html[data-lang="ko"] footer .big { font-family: var(--body); font-weight: 600; font-size: 26px; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; gap: 32px; padding-top: 44px; }
+  .ticker { grid-template-columns: repeat(2, 1fr); }
+  .stat:nth-child(3) { border-left: 0; padding-left: 0; }
+  .stat:nth-child(n+3) { border-top: 1px solid var(--rule); }
+  .case { grid-template-columns: 1fr; }
+  .case-meta { border-right: 0; border-bottom: 1px dashed var(--rule); }
+  .caps { grid-template-columns: 1fr; }
+  .cap, .cap:not(:nth-child(3n+1)) { padding-left: 0; border-left: 0; }
+  .job { grid-template-columns: 1fr; gap: 6px; }
+  .edu { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .wrap { padding: 0 16px; }
+  .rows > div { grid-template-columns: 1fr; gap: 2px; }
+  .stat b { font-size: 36px; }
+  .bar .dateline { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="bar">
+    <span>NICOLE JI · PR PORTFOLIO</span>
+    <span class="dateline"><span class="en">Seoul, KR · Healthcare &amp; Music PR</span><span class="ko">서울 · 헬스케어·음악 PR</span></span>
+    <div class="toggle" role="group" aria-label="Language">
+      <button type="button" id="btn-en" aria-pressed="true">EN</button>
+      <button type="button" id="btn-ko" aria-pressed="false">KR</button>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div>
+      <p class="kicker"><span class="en">Account Executive · Hive Worldwide</span><span class="ko">하이브월드와이드 AE</span></p>
+      <h1>Nicole <em>Ji</em></h1>
+      <p class="thesis en">A psychology graduate in PR who reads audiences and the news closely, and <span class="mark">delivers before the deadline</span> for healthcare and music brands.</p>
+      <p class="thesis ko">사람의 마음을 공부한 홍보인. 독자와 기사를 꼼꼼히 읽고, 헬스케어·음악 브랜드의 결과물을 <span class="mark">마감 전에</span> 전달합니다.</p>
+    </div>
+    <aside class="card-id" aria-label="Contact">
+      <dl>
+        <dt><span class="en">Now</span><span class="ko">현재</span></dt>
+        <dd><span class="en">Account Executive, Hive Worldwide (Feb 2026 – Present)</span><span class="ko">하이브월드와이드 AE (2026.02 – 현재)</span></dd>
+        <dt><span class="en">Clients</span><span class="ko">고객사</span></dt>
+        <dd><span class="en">Novo’s Wegovy · J&amp;J MedTech Korea · Dreamus Company (FLO)</span><span class="ko">노보 위고비 · 존슨앤드존슨 메드테크 코리아 · 드림어스컴퍼니(플로)</span></dd>
+        <dt><span class="en">Languages</span><span class="ko">언어</span></dt>
+        <dd><span class="en">Korean (Native) · English (Fluent)</span><span class="ko">한국어(모국어) · 영어(능통)</span></dd>
+        <dt>Email</dt>
+        <dd><a href="mailto:jsa061252@gmail.com">jsa061252@gmail.com</a></dd>
+        <dt>LinkedIn</dt>
+        <dd><a href="https://www.linkedin.com/in/nicole-ji-8a42b2325">linkedin.com/in/nicole-ji-8a42b2325</a></dd>
+      </dl>
+    </aside>
+  </div>
+
+  <div class="ticker" aria-label="Highlights">
+    <div class="stat"><b>2 → 1</b><span class="en">Two-person monitoring workload run solo (50% resource reduction)</span><span class="ko">2인 모니터링 업무 단독 수행 (투입 인력 50% 절감)</span></div>
+    <div class="stat"><b>100s</b><span class="en">Articles collected weekly, with sentiment classified daily</span><span class="ko">매주 수집하는 기사 수백 건, 매일 센티먼트 분류</span></div>
+    <div class="stat"><b>3</b><span class="en">Global clients across healthcare and music tech</span><span class="ko">헬스케어·음악 플랫폼 글로벌 고객사</span></div>
+    <div class="stat"><b>13+</b><span class="en">Global brands supported across three agencies</span><span class="ko">세 곳 에이전시에서 지원한 글로벌 브랜드</span></div>
+  </div>
+
+  <section id="work">
+    <div class="sec-head">
+      <h2><span class="en">Selected work</span><span class="ko">대표 프로젝트</span></h2>
+      <span class="count">05</span>
+    </div>
+    <div class="cases">
+
+      <article class="case">
+        <div class="case-meta">
+          <span class="client">Novo · Wegovy</span>
+          <span class="tag"><span class="en">Media monitoring &amp; reporting</span><span class="ko">미디어 모니터링·리포팅</span></span>
+        </div>
+        <div class="case-body">
+          <h3 class="en">Running a two-person monitoring desk on my own, and finishing it within office hours</h3>
+          <h3 class="ko">2인이 하던 모니터링을 혼자, 업무 시간 안에 끝내다</h3>
+          <dl class="rows">
+            <div><dt><span class="en">Challenge</span><span class="ko">과제</span></dt>
+              <dd><span class="en">Daily monitoring for a high-profile obesity treatment, previously shared by two people and delivered to the client after office hours.</span><span class="ko">관심도가 높은 비만 치료제의 데일리 모니터링. 기존에는 2인이 나눠 맡았고 고객사 전달은 업무 시간 이후에 이뤄졌습니다.</span></dd></div>
+            <div><dt><span class="en">What I did</span><span class="ko">한 일</span></dt>
+              <dd><span class="en">Took sole ownership end to end, collecting hundreds of articles a week and classifying sentiment every day, and streamlined the daily workflow from internal review to final client delivery.</span><span class="ko">수집부터 전달까지 전담했습니다. 매주 수백 건의 기사를 모으고 매일 센티먼트를 분류했으며, 내부 검토부터 고객사 최종본 송부까지 데일리 업무 흐름을 정리했습니다.</span></dd></div>
+            <div><dt><span class="en">Impact</span><span class="ko">성과</span></dt>
+              <dd><span class="en"><span class="result">50% resource reduction</span> and internal review, revisions, and final client delivery moved <span class="result">within office hours</span>.</span><span class="ko"><span class="result">투입 인력 50% 절감</span>, 내부 검토·수정부터 최종본 송부까지 <span class="result">업무 시간 안에 완료</span>.</span></dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-meta">
+          <span class="client">Novo · Wegovy / Dreamus · FLO</span>
+          <span class="tag"><span class="en">Client reporting</span><span class="ko">리포트</span></span>
+        </div>
+        <div class="case-body">
+          <h3 class="en">Reports that tell the client what happened and what to do next</h3>
+          <h3 class="ko">무슨 일이 있었고 다음에 무엇을 할지 알려주는 리포트</h3>
+          <dl class="rows">
+            <div><dt><span class="en">Wegovy</span><span class="ko">위고비</span></dt>
+              <dd><span class="en">Wrote bilingual (Korean/English) weekly and monthly media reports on its own, analyzing coverage tone, brand visibility, and issues and risks, and proposing next-week implications and responses in line with media inquiry guidelines.</span><span class="ko">국·영문 주간·월간 미디어 리포트를 단독으로 작성했습니다. 보도 톤, 브랜드 가시성, 이슈와 리스크를 분석하고, 미디어 문의 규정에 맞춰 차주 시사점과 대응 방향을 제안했습니다.</span></dd></div>
+            <div><dt><span class="en">FLO</span><span class="ko">플로</span></dt>
+              <dd><span class="en">Write the monthly client meeting report delivered every month, summarizing client discussions and separating client and agency action items.</span><span class="ko">매달 발송되는 월간 고객사 미팅 보고서를 작성합니다. 고객사 논의 내용을 정리하고, 고객사와 에이전시의 할 일을 구분해 담습니다.</span></dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-meta">
+          <span class="client">Novo · Wegovy</span>
+          <span class="tag"><span class="en">Digital content &amp; media</span><span class="ko">디지털 콘텐츠·미디어</span></span>
+        </div>
+        <div class="case-body">
+          <h3 class="en">Digital content (YouTube, Instagram) from concept to publication</h3>
+          <h3 class="ko">디지털 콘텐츠(유튜브, 인스타그램), 기획부터 발행까지</h3>
+          <dl class="rows">
+            <div><dt><span class="en">Role</span><span class="ko">역할</span></dt>
+              <dd><span class="en">Planned the content and served as the main point of contact between the client and the production agency, from concept development through publication.</span><span class="ko">콘텐츠를 기획하고, 콘셉트 기획부터 발행까지 고객사와 제작사 사이의 커뮤니케이션을 주도했습니다.</span></dd></div>
+            <div><dt><span class="en">Output</span><span class="ko">결과물</span></dt>
+              <dd><span class="en">Produced the final deliverables for publication.</span><span class="ko">발행용 최종 결과물을 제작했습니다.</span></dd></div>
+            <div><dt><span class="en">Interview</span><span class="ko">인터뷰</span></dt>
+              <dd><span class="en">Attended a media interview with a medical expert and managed post-interview follow-ups.</span><span class="ko">의료 전문가 언론 인터뷰에 참석해 후속 업무를 진행했습니다.</span></dd></div>
+          </dl>
+          <div class="linkgroup">
+            <span class="lg-label">YouTube</span>
+            <div class="links"><a class="lk" href="https://youtu.be/BYUJ6WFY5w8" target="_blank" rel="noopener"><span class="en">Main video</span><span class="ko">본편 영상</span></a><a class="lk" href="https://www.youtube.com/shorts/Bja8rbeIYf8" target="_blank" rel="noopener"><span class="en">Shorts 1</span><span class="ko">쇼츠 1</span></a><a class="lk" href="https://www.youtube.com/shorts/wYvZno28f1c" target="_blank" rel="noopener"><span class="en">Shorts 2</span><span class="ko">쇼츠 2</span></a><a class="lk" href="https://www.youtube.com/shorts/AAS55Rk61tE" target="_blank" rel="noopener"><span class="en">Shorts 3</span><span class="ko">쇼츠 3</span></a></div>
+          </div>
+          <div class="linkgroup">
+            <span class="lg-label">Instagram Reels</span>
+            <div class="links"><a class="lk" href="https://www.instagram.com/yqueen_kr/reel/DeqIt8sBsFW/" target="_blank" rel="noopener"><span class="en">Reels 1</span><span class="ko">릴스 1</span></a><a class="lk" href="https://www.instagram.com/yqueen_kr/reel/De0skfRyIEu/" target="_blank" rel="noopener"><span class="en">Reels 2</span><span class="ko">릴스 2</span></a><a class="lk" href="https://www.instagram.com/yqueen_kr/reel/DevSP_TBzPK/" target="_blank" rel="noopener"><span class="en">Reels 3</span><span class="ko">릴스 3</span></a></div>
+          </div>
+          <div class="linkgroup">
+            <span class="lg-label"><span class="en">Expert interview</span><span class="ko">전문가 인터뷰</span></span>
+            <div class="links"><a class="lk" href="https://health.chosun.com/site/data/html_dir/2026/06/19/2026061901398.html" target="_blank" rel="noopener"><span class="en">Health Chosun · Prof. Cheon Dae-young</span><span class="ko">헬스조선 · 천대영 교수 인터뷰</span></a></div>
+          </div>
+          <div class="linkgroup">
+            <span class="lg-label"><span class="en">Pitched coverage</span><span class="ko">피칭 기사</span></span>
+            <div class="links"><a class="lk" href="https://www.newsway.co.kr/news/view?ud=2026111813191832235" target="_blank" rel="noopener"><span class="en">Newsway</span><span class="ko">뉴스웨이</span></a></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-meta">
+          <span class="client">J&amp;J MedTech Korea</span>
+          <span class="tag"><span class="en">Media relations</span><span class="ko">미디어 관계</span></span>
+        </div>
+        <div class="case-body">
+          <h3 class="en">Media inquiries and press releases aligned with global messaging</h3>
+          <h3 class="ko">글로벌 메시지에 맞춘 미디어 문의 대응과 보도자료</h3>
+          <dl class="rows">
+            <div><dt><span class="en">Inquiries</span><span class="ko">문의 대응</span></dt>
+              <dd><span class="en">Handled media inquiries by coordinating with the APAC team to secure approved responses, then delivered timely, accurate answers to reporters.</span><span class="ko">APAC 팀과 소통해 승인된 답변을 확보하고, 기자에게 신속하고 정확하게 전달했습니다.</span></dd></div>
+            <div><dt><span class="en">Press</span><span class="ko">보도</span></dt>
+              <dd><span class="en">Developed and distributed Korean press releases through each approval round, and secured feature articles, including disease awareness content, across online and print media.</span><span class="ko">승인 단계마다 고객사 피드백을 반영해 국문 보도자료를 작성·배포했고, 질환 인지 콘텐츠를 포함한 온·오프라인 기획기사를 게재했습니다.</span></dd></div>
+          </dl>
+          <div class="linkgroup">
+            <span class="lg-label"><span class="en">Press release coverage</span><span class="ko">보도자료 게재</span></span>
+            <div class="links"><a class="lk" href="https://www.donga.com/news/Health/article/all/20260921/134708436/2" target="_blank" rel="noopener"><span class="en">The Dong-A Ilbo</span><span class="ko">동아일보</span></a></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-meta">
+          <span class="client">Dreamus · FLO</span>
+          <span class="tag"><span class="en">Press &amp; media events</span><span class="ko">보도·미디어 행사</span></span>
+        </div>
+        <div class="case-body">
+          <h3 class="en">Positioning FLO as a fandom-centric music platform</h3>
+          <h3 class="ko">플로를 팬덤향 음악 플랫폼으로 알리다</h3>
+          <dl class="rows">
+            <div><dt><span class="en">Press</span><span class="ko">보도</span></dt>
+              <dd><span class="en">Wrote and distributed press releases on new features, partnerships, and fan engagement initiatives, and pitched feature articles on FLO’s fandom features.</span><span class="ko">신규 기능, 제휴, 팬 참여 프로그램 관련 보도자료를 작성·배포하고, 플로의 팬덤 기능을 다룬 기획기사를 피칭했습니다.</span></dd></div>
+            <div><dt><span class="en">Events</span><span class="ko">행사</span></dt>
+              <dd><span class="en">Supported a <span class="result">20+ media roundtable</span> and interviews, from journalist outreach and preparation to follow-ups.</span><span class="ko"><span class="result">20여 개 매체 라운드테이블</span>과 인터뷰를 지원하며 기자 섭외, 준비, 후속 대응을 맡았습니다.</span></dd></div>
+          </dl>
+          <div class="linkgroup">
+            <span class="lg-label"><span class="en">CEO interview</span><span class="ko">대표 인터뷰</span></span>
+            <div class="links"><a class="lk" href="https://view.asiae.co.kr/article/2026050219132886108" target="_blank" rel="noopener"><span class="en">Asia Business Daily · CEO Lee Ki-young</span><span class="ko">아시아경제 · 이기영 대표 인터뷰</span></a></div>
+          </div>
+          <div class="linkgroup">
+            <span class="lg-label"><span class="en">Press release coverage</span><span class="ko">보도자료 게재</span></span>
+            <div class="links"><a class="lk" href="https://www.newsis.com/view/NISX20260702_0003693772" target="_blank" rel="noopener"><span class="en">Newsis · FLO ZIP launch</span><span class="ko">뉴시스 · '플로집' 론칭</span></a></div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head">
+      <h2><span class="en">What I bring</span><span class="ko">핵심 역량</span></h2>
+    </div>
+    <div class="caps">
+      <div class="cap"><h4><span class="en">Monitoring &amp; insight</span><span class="ko">모니터링·인사이트</span></h4><p><span class="en">Daily tracking, sentiment analysis, and reports that tell the client what to do next.</span><span class="ko">데일리 트래킹과 센티먼트 분석, 다음 대응까지 담은 리포트.</span></p></div>
+      <div class="cap"><h4><span class="en">Press writing</span><span class="ko">보도자료·기획기사</span></h4><p><span class="en">Korean and English press releases and feature pitches written for how reporters read.</span><span class="ko">기자가 읽는 방식에 맞춘 국·영문 보도자료와 기획기사 피칭.</span></p></div>
+      <div class="cap"><h4><span class="en">Media relations</span><span class="ko">미디어 관계</span></h4><p><span class="en">Inquiry handling, interviews, roundtables, and follow-ups with journalists.</span><span class="ko">미디어 문의 대응, 인터뷰, 라운드테이블, 기자 후속 관리.</span></p></div>
+      <div class="cap"><h4><span class="en">Regulated communications</span><span class="ko">규제 산업 커뮤니케이션</span></h4><p><span class="en">Healthcare PR within approval processes and media inquiry guidelines.</span><span class="ko">승인 절차와 미디어 문의 규정을 지키는 헬스케어 PR.</span></p></div>
+      <div class="cap"><h4><span class="en">Global coordination</span><span class="ko">글로벌 협업</span></h4><p><span class="en">Working with APAC and global teams across markets and time zones.</span><span class="ko">여러 시장과 시차를 넘나드는 APAC·글로벌 팀과의 협업.</span></p></div>
+      <div class="cap"><h4><span class="en">Audience psychology</span><span class="ko">독자 심리 이해</span></h4><p><span class="en">A psychology degree and clinical psychology certification behind every message.</span><span class="ko">심리학 전공과 임상심리사 자격을 바탕으로 한 메시지 설계.</span></p></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head">
+      <h2><span class="en">Experience</span><span class="ko">경력</span></h2>
+    </div>
+    <div class="timeline">
+      <div class="job">
+        <div class="when">2026.02 – <span class="en">Present</span><span class="ko">현재</span></div>
+        <div>
+          <h3><span class="en">Hive Worldwide</span><span class="ko">하이브월드와이드</span></h3>
+          <p class="role"><span class="en">Account Executive</span><span class="ko">AE(Account Executive)</span></p>
+          <p class="brands"><span class="en">Novo’s Wegovy · J&amp;J MedTech Korea · Dreamus Company (FLO)</span><span class="ko">노보 위고비 · 존슨앤드존슨 메드테크 코리아 · 드림어스컴퍼니(플로)</span></p>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">2025.10 – 2026.01</div>
+        <div>
+          <h3><span class="en">PR ONE</span><span class="ko">피알원</span></h3>
+          <p class="role"><span class="en">Global Team Intern</span><span class="ko">글로벌팀 인턴</span></p>
+          <ul>
+            <li><span class="en">Managed 6+ global brands including LEGO, P&amp;G, Agoda, Air France, Amway, and the French Tourism Board</span><span class="ko">레고, P&amp;G, 아고다, 에어프랑스, 암웨이, 프랑스관광청 등 6개 이상 글로벌 브랜드 담당</span></li>
+            <li><span class="en">Produced 10+ press releases in Korean and English; ran influencer collaborations and event activations</span><span class="ko">국·영문 보도자료 10건 이상 작성, 인플루언서 협업과 이벤트 실행</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">2025.02 – 2025.08</div>
+        <div>
+          <h3><span class="en">Edelman</span><span class="ko">에델만</span></h3>
+          <p class="role"><span class="en">Corporate Team Intern</span><span class="ko">코퍼레이트팀 인턴</span></p>
+          <ul>
+            <li><span class="en">Supported global brands including lululemon, ZARA, VISA, and IKEA</span><span class="ko">룰루레몬, 자라, 비자, 이케아 등 글로벌 브랜드 지원</span></li>
+            <li><span class="en">Translated press materials into English and supported research for new business bids</span><span class="ko">홍보 자료 영문 번역, 신규 비즈니스 입찰 리서치 지원</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="sec-head">
+      <h2><span class="en">Education &amp; certification</span><span class="ko">학력·자격</span></h2>
+    </div>
+    <div class="edu">
+      <div>
+        <h3><span class="en">University at Buffalo, SUNY</span><span class="ko">뉴욕주립대 버펄로(UB)</span></h3>
+        <p><span class="en">B.A. in Psychology · 2017 – 2022</span><span class="ko">심리학 학사 · 2017 – 2022</span></p>
+      </div>
+      <div>
+        <h3><span class="en">Clinical Psychology Practitioner</span><span class="ko">임상심리사</span></h3>
+        <p><span class="en">Human Resources Development Service of Korea (HRDK) · 2024</span><span class="ko">한국산업인력공단 · 2024</span></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="big"><span class="en">Let’s talk.</span><span class="ko">연락 주세요.</span></div>
+    <div>
+      <div>Email · jsa061252@gmail.com</div>
+      <div>LinkedIn · <a href="https://www.linkedin.com/in/nicole-ji-8a42b2325">linkedin.com/in/nicole-ji-8a42b2325</a></div>
+    </div>
+  </footer>
+
+</div>
+<script>
+(function () {
+  var root = document.documentElement;
+  var en = document.getElementById('btn-en');
+  var ko = document.getElementById('btn-ko');
+  function setLang(l) {
+    root.setAttribute('data-lang', l);
+    root.setAttribute('lang', l === 'ko' ? 'ko' : 'en');
+    en.setAttribute('aria-pressed', String(l === 'en'));
+    ko.setAttribute('aria-pressed', String(l === 'ko'));
+    try { localStorage.setItem('nj-lang', l); } catch (e) {}
+  }
+  en.addEventListener('click', function () { setLang('en'); });
+  ko.addEventListener('click', function () { setLang('ko'); });
+  var saved = null;
+  try { saved = localStorage.getItem('nj-lang'); } catch (e) {}
+  if (saved === 'ko' || saved === 'en') setLang(saved);
+})();
+</script>
+</body>
+</html>
